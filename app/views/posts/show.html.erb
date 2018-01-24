@@ -1,13 +1,15 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Usuario:</strong>
-  <%= @post.usuario %>
+  <%= @post.usuario.nome %>
 </p>
 
 <p>
   <strong>Conteudo:</strong>
   <%= @post.conteudo %>
+</p>
+
+<p>
+  <%= render "comentarios/form", comentario: @comentario %>
 </p>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |

@@ -1,5 +1,8 @@
 class PostsController < ApplicationController
+  before_action :usuario_nao_logado
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :usuario_correto, only: [:edit, :update]
+  before_action :usuario_correto_ou_admin, only: :destroy
 
   # GET /posts
   # GET /posts.json
@@ -10,6 +13,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @comentario = Comentario.new
   end
 
   # GET /posts/new
@@ -28,10 +32,11 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.html { redirect_to feed_path, notice: 'Post criado.' }
         format.json { render :show, status: :created, location: @post }
       else
-        format.html { render :new }
+        @posts = Post.all.order(updated_at: :desc)
+        format.html { render "feed" }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
@@ -61,6 +66,13 @@ class PostsController < ApplicationController
     end
   end
 
+  # GET /feed
+  def feed
+    @post = Post.new
+    @posts = Post.all.order(updated_at: :desc).paginate(:page => params[:page],
+       :per_page => 10)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
@@ -70,5 +82,19 @@ class PostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:usuario_id, :conteudo)
+    end
+
+    def usuario_correto
+      if current_user != @post.usuario
+        flash[:alert] = "Não permitido."
+        redirect_to posts_path
+      end
+    end
+
+    def usuario_correto_ou_admin
+      if !current_user.admin && current_user != @post.usuario
+        flash[:alert] = "Não permitido."
+        redirect_to posts_path
+      end
     end
 end
