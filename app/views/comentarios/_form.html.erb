@@ -2,7 +2,7 @@
 
   <%= hidden_field_tag "comentario[usuario_id]", current_user.id %>
 
-  <%= hidden_field_tag "comentario[post_id]", params[:post_id] %>
+  <%= hidden_field_tag "comentario[post_id]", params[:id] %>
 
   <div class="field">
     <%= form.label :conteudo %>

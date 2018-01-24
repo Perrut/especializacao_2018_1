@@ -28,10 +28,12 @@ class ComentariosController < ApplicationController
 
     respond_to do |format|
       if @comentario.save
-        format.html { redirect_to @comentario, notice: 'Comentario was successfully created.' }
+        format.html { redirect_to post_path(id: @comentario.post.id),
+          notice: 'Comentario was successfully created.' }
         format.json { render :show, status: :created, location: @comentario }
       else
-        format.html { render :new }
+        @post = @comentario.post
+        format.html { render "posts/show" }
         format.json { render json: @comentario.errors, status: :unprocessable_entity }
       end
     end

@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :usuario
+  has_many :comentarios, dependent: :destroy
 
   validates :conteudo, presence: true, length: { in: 1..140 }
 
