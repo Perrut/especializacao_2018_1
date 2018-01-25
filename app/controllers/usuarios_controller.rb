@@ -8,10 +8,17 @@ class UsuariosController < ApplicationController
   # PATCH buscacidades
   def buscacidades
     estado = Estado.find_by(id: params[:estado])
-    @cidades = estado.cidades
+    cidades = estado.cidades if estado
+
+    @result = []
+    if cidades
+      cidades.each do |cidade|
+        @result.append cidade
+      end
+    end
 
     respond_to do |format|
-      format.json { render json: @cidades }
+      format.json { render json: @result }
     end
   end
 

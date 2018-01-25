@@ -5,6 +5,10 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# geracao automatica de senhas
+gem "passgen"
+# redimensionamento de imagens
+gem "mini_magick"
 # biblioteca JavaScript jQuery
 gem 'jquery-rails', '~> 4.3'
 # gem para paginacao

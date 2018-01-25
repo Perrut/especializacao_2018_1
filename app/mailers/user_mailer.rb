@@ -5,9 +5,10 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.esqueci_minha_senha.subject
   #
-  def esqueci_minha_senha(usuario)
+  def esqueci_minha_senha(usuario, senha)
     @usuario = usuario
+    @senha = senha
 
-    mail to: @usuario.email
+    mail to: @usuario.email, subject: "Recuperacao de Senha"
   end
 end

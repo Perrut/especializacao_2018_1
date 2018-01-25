@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   root to: "usuarios#index"
 
+  # RedefinirSenha controller
+  get 'redefinir_senha/busca', to: "redefinir_senha#busca", as: :redefinir_senha
+  post 'redefinir_senha/busca', to: "redefinir_senha#recuperar"
+
   # Comentarios controller
   resources :comentarios
 

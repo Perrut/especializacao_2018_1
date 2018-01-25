@@ -15,6 +15,10 @@ $("#estado").change(function() {
 		    $('#cidade').append('<option value="' + result[i].id + '">' + result[i].nome + '</option>');
 		  }
 		  $('#cidade').prop('disabled', false);
+
+			if (result.length == 0) {
+				$('#cidade').prop('disabled', true);
+			}
 	  }
 	});
 
