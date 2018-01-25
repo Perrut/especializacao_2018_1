@@ -4,6 +4,18 @@ class PostsController < ApplicationController
   before_action :usuario_correto, only: [:edit, :update]
   before_action :usuario_correto_ou_admin, only: :destroy
 
+  # PATCH curtir/1
+  def curtir
+    current_user.likes.build(post_id: params[:post_id]).save
+    redirect_to feed_path
+  end
+
+  # PATCH descurtir/1
+  def descurtir
+    current_user.likes.where(post_id: params[:post_id]).destroy
+    redirect_to feed_path
+  end
+
   # GET /posts
   # GET /posts.json
   def index

@@ -5,6 +5,17 @@
 
 <% @posts.each do |post| %>
   <p><%= post.conteudo %></p>
+  <% if current_user.likes.where(post_id: post.id).empty? %>
+    <p>
+      <%= link_to "Curtir", curtir_path(post_id: post.id),
+        method: :patch %> (<%= post.likes.count %>)
+    </p>
+  <% else %>
+    <p>
+      <%= link_to "Descurtir", descurtir_path(post_id: post.id),
+        method: :patch %> (<%= post.likes.count %>)
+    </p>
+  <% end %>
   <p>
     Escrito por <%= link_to post.usuario.nome,
     show_usuario_path(id: post.usuario.id) %>

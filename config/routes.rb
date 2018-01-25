@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
-  resources :comentarios
   root to: "usuarios#index"
 
+  # Comentarios controller
+  resources :comentarios
+
   # Posts controller
+  patch 'curtir/:post_id', to: "posts#curtir", as: :curtir
+  patch 'descurtir/:post_id', to: "posts#descurtir", as: :descurtir
   get 'feed', to: "posts#feed", as: :feed
   resources :posts
 
