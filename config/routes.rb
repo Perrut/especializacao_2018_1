@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
-  resources :comentarios
   root to: "usuarios#index"
 
+  # Comentarios controller
+  resources :comentarios
+
   # Posts controller
+  patch 'curtir/:post_id/:usuario_id', to: "posts#curtir", as: :like_post
+  patch 'descurtir/:post_id/:usuario_id', to: "posts#descurtir", as: :dislike_post
   get 'feed', to: "posts#feed", as: :feed
   resources :posts
 
@@ -12,6 +16,7 @@ Rails.application.routes.draw do
   delete 'logout', to: "sessoes#destroy", as: :logout
 
   # Usuarios controller
+  patch 'buscacidades', to: "usuarios#buscacidades", as: :buscacidades
   get 'usuarios/novo', to: "usuarios#new", as: :new_usuario
   post 'usuarios/novo', to: "usuarios#create"
   get 'usuarios/editar/:id', to: "usuarios#edit", as: :edit_usuario

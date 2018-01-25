@@ -5,6 +5,12 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# jquery javascript library
+gem 'jquery-rails', '~> 4.3'
+
+# gems para manipulacao de imagens
+gem 'mini_magick', '4.7.0'
+
 # gem para paginacao
 gem 'will_paginate', '~> 3.1.0'
 # gem para importacao de arquivos para o sistema

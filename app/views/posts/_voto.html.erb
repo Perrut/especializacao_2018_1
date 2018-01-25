@@ -1,0 +1,13 @@
+<% if !current_user.likes.where(post_id: @post.id).empty? %>
+
+  <p id="descurtir<%= @post.id %>"><%= link_to "Descurtir", dislike_post_path(post_id: @post.id,
+    usuario_id: current_user.id), method: :patch,
+    remote: true %> <%= "(#{@post.likes.count})" %></p>
+    
+<% else %>
+
+  <p id="curtir<%= @post.id %>"><%= link_to "Curtir", like_post_path(post_id: @post.id,
+    usuario_id: current_user.id), method: :patch,
+    remote: true %> <%= "(#{@post.likes.count})" %></p>
+    
+<% end %>
