@@ -64,7 +64,7 @@ class UsuariosController < ApplicationController
   # boa pratica de seguranca
   def usuario_params
     params.require(:usuario).permit(:nome, :sobrenome, :email, :data_nascimento,
-      :telefone, :password, :password_confirmation, :avatar)
+      :telefone, :password, :password_confirmation, :avatar, :cidade_id)
   end
 
   def usuario_correto
