@@ -6,14 +6,24 @@ class PostsController < ApplicationController
 
   # PATCH curtir/1
   def curtir
+    @post = Post.find_by(id: params[:post_id])
     current_user.likes.build(post_id: params[:post_id]).save
-    redirect_to feed_path
+
+    respond_to do |format|
+      format.html { redirect_to feed_path }
+      format.js
+    end
   end
 
   # PATCH descurtir/1
   def descurtir
+    @post = Post.find_by(id: params[:post_id])
     current_user.likes.find_by(post_id: params[:post_id]).destroy
-    redirect_to feed_path
+
+    respond_to do |format|
+      format.html { redirect_to feed_path }
+      format.js
+    end
   end
 
   # GET /posts

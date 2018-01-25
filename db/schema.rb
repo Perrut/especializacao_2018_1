@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180125122733) do
+ActiveRecord::Schema.define(version: 20180125143448) do
+
+  create_table "cidades", force: :cascade do |t|
+    t.integer "estado_id"
+    t.string "nome"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["estado_id"], name: "index_cidades_on_estado_id"
+  end
 
   create_table "comentarios", force: :cascade do |t|
     t.integer "usuario_id"
@@ -20,6 +28,13 @@ ActiveRecord::Schema.define(version: 20180125122733) do
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_comentarios_on_post_id"
     t.index ["usuario_id"], name: "index_comentarios_on_usuario_id"
+  end
+
+  create_table "estados", force: :cascade do |t|
+    t.string "uf"
+    t.string "nome"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "likes", force: :cascade do |t|
@@ -50,6 +65,8 @@ ActiveRecord::Schema.define(version: 20180125122733) do
     t.string "password_digest"
     t.boolean "admin"
     t.string "avatar"
+    t.integer "cidade_id"
+    t.index ["cidade_id"], name: "index_usuarios_on_cidade_id"
   end
 
 end
