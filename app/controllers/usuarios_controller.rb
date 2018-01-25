@@ -1,9 +1,19 @@
 class UsuariosController < ApplicationController
   before_action :set_usuario, only: [:show, :edit, :update, :destroy]
-  before_action :usuario_nao_logado, except: [:new, :create]
+  before_action :usuario_nao_logado, except: [:new, :create, :buscacidades]
   before_action :usuario_logado, only: [:new, :create]
   before_action :usuario_correto, only: [:edit, :update]
   before_action :usuario_correto_ou_admin, only: :destroy
+
+  # PATCH buscacidades
+  def buscacidades
+    estado = Estado.find_by(id: params[:estado])
+    @cidades = estado.cidades
+
+    respond_to do |format|
+      format.json { render json: @cidades }
+    end
+  end
 
   # GET usuarios/novo
   def new

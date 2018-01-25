@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   delete 'logout', to: "sessoes#destroy", as: :logout
 
   # Usuarios controller
+  patch 'buscacidades', to: "usuarios#buscacidades", as: :buscacidades
   get 'usuarios/novo', to: "usuarios#new", as: :new_usuario
   post 'usuarios/novo', to: "usuarios#create"
   get 'usuarios/editar/:id', to: "usuarios#edit", as: :edit_usuario

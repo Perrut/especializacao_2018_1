@@ -10,6 +10,7 @@ $("#estado").change(function() {
 	    //adicionar opções ao dropdown e habilitar o mesmo
 	    $('#cidade').html('');
 	    var i = 0;
+
 	    for (i = 0; i < result.length; i++) {
 		    $('#cidade').append('<option value="' + result[i].id + '">' + result[i].nome + '</option>');
 		  }
