@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# biblioteca JavaScript jQuery
+gem 'jquery-rails', '~> 4.3'
 # gem para paginacao
 gem 'will_paginate', '~> 3.1.0'
 # gem para importacao de arquivos para o sistema

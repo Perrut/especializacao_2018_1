@@ -12,7 +12,7 @@ class PostsController < ApplicationController
 
   # PATCH descurtir/1
   def descurtir
-    current_user.likes.where(post_id: params[:post_id]).destroy
+    current_user.likes.find_by(post_id: params[:post_id]).destroy
     redirect_to feed_path
   end
 
